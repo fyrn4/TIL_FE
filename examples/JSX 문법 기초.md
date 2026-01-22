@@ -56,6 +56,44 @@ function ObjectArrayExpressions() {
     </div>
   )
 }
-  
+
+function FunctionExpressions() {
+  const getGreeting = (name) => `Hello, ${name}!`;
+  const formatDate = (date) => {
+    return new Date(date).toLocaleDateString();
+  }
+  const calculateTotal = (items) => {
+    return items.reduce((sum, item) => sum + item.price, 0);
+    /*
+      array.reduce((누적값, 현재값) => {
+        return 새로운_누적값;
+      }, 초기값);
+     */
+  }
+  const itemArr = [{id:1, price:10}, {id:2, price:20}];
+
+  return (
+    <div>
+      <p>{getGreeting("Alice")}</p>
+      <p>Today : {formatDate(new Date())}</p>
+      <p>Total: ${calculateTotal(itemArr)}</p>
+      <p>Good {(()=> {
+        const hours = new Date().getHours();
+        return hours < 12 ? "Morning" : "Afternoon";
+      })()}</p>
+      /* Good 부분 즉시실행함수 설명
+      <p>Good {여기에 JS 식 사용가능}</p>
+      핵심 포인트(함수를 정의하자마자 사용) : (() => { ... })()
+        (function () {
+          const hours = new Date().getHours();
+          return hours < 12 ? "Morning" : "Afternoon";
+        })();
+      위와 같다.
+      추가로, { if (hours < 12) { ... } } 이와같이 즉시실행함수 jsx 안에서는 if문을 직접 쓸수가없다.
+      */
+    </div>
+  )
+}
+
 
 export default App
